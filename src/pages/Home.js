@@ -11,7 +11,7 @@ const Home = () => {
   const filteredProducts = products.filter(item => {
     return item.category === "men's clothing" || item.category === "women's clothing"
   });
-  console.log(filteredProducts);
+  //console.log(filteredProducts);
   return <div>
     <section className='py-16'>
       <div className='container mx-auto'>
