@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useContext } from 'react';
 //sidebar context
@@ -18,19 +18,37 @@ import Logo from '../img/logo.svg';
 
 
 const Header = () => {
+  //header state
+  const [isActive, setIsActive] = useState(false);
+
   const { isOpen, setIsOpen } = useContext(SidebarContext);
 
   const { itemAmount } = useContext(CartContext);
 
-  return <header className=' bg-pink-200  '>
-    <Link>
-      <div>
-        <img src='' to="/" alt="home" />
+  //event listener
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      window.scrollY > 60 ? setIsActive(true) : setIsActive(false);
+    })
+  })
+
+  return <header className={`${isActive ? 'bg-white py-4 shadow-md' : 'bg-none py-6'} fixed w-full z-10 transition-all`}>
+    <div className='container mx-auto  flex items-center justify-between h-full'>
+      {/* logo */}
+      <Link>
+        <div>
+          <img className='w-[150px]' src={Logo} to="/" alt="home" />
+        </div>
+      </Link>
+      <div onClick={() => setIsOpen(!isOpen)} className=' cursor-pointer flex relative'>
+        <BsBag className='text-2xl  ' />
+        <div className='bg-red-500 absolute -right-2 -bottom-2 text-[12px] h-[18px] w-[18px] text-white rounded-full justify-center flex items-center'>
+          {itemAmount}
+        </div>
       </div>
-    </Link>
-    <div onClick={() => setIsOpen(!isOpen)} className=' cursor-pointer flex relative max-w-[50px]'> <BsBag className='text-2xl  ' /> </div>
-    <div className='bg-red-500 absolute -right-2 -bottom-2 text-[2px] h-[18px]
-     w-[18px] text-white rounded-full justify-center flex items-center'>{itemAmount}</div>
+
+    </div>
+
   </header>;
 };
 
