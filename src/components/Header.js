@@ -35,9 +35,9 @@ const Header = () => {
   return <header className={`${isActive ? 'bg-white py-4 shadow-md' : 'bg-none py-6'} fixed w-full z-10 transition-all`}>
     <div className='container mx-auto  flex items-center justify-between h-full'>
       {/* logo */}
-      <Link>
+      <Link to={'/'}>
         <div>
-          <img className='w-[150px]' src={Logo} to="/" alt="home" />
+          <img className='w-[150px]' src={Logo} alt="home" />
         </div>
       </Link>
       <div onClick={() => setIsOpen(!isOpen)} className=' cursor-pointer flex relative'>
